@@ -1,12 +1,19 @@
-# Welcome to your CDK JavaScript project
+# README
 
-This is a blank project for CDK development with JavaScript.
+# CDK Deployment for API Gateway, S3, Lambda, and DynamoDB
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app. The build step is not required when using JavaScript.
+This project creates a CDK deployment that provisions an AWS API Gateway, S3 Bucket, Lambda function, and DynamoDB table. The deployment allows users to upload files to S3 using the API and insert data from the uploaded files into the DynamoDB table.
 
-## Useful commands
+## Prerequisites
 
-* `npm run test`         perform the jest unit tests
-* `cdk deploy`           deploy this stack to your default AWS account/region
-* `cdk diff`             compare deployed stack with current state
-* `cdk synth`            emits the synthesized CloudFormation template
+Ensure you have the following prerequisites installed and configured:
+
+- [Node.js and npm](https://nodejs.org/) (Node.js version >= 14)
+- [AWS CLI](https://aws.amazon.com/cli/) with configured AWS credentials
+- [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html) installed globally
+
+## Setup
+
+Follow these steps to set up your development environment and deploy the CDK stack:
+
+
