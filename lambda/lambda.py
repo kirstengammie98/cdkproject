@@ -6,7 +6,6 @@ TABLE_NAME = os.environ['DYNAMODB_TABLE']
 
 s3_client = boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table(TABLE_NAME)
 
 
 def lambda_handler(event, context):
@@ -21,6 +20,8 @@ def lambda_handler(event, context):
         
         # Parse the file content (assuming it's JSON) and insert it into DynamoDB
         data = json.loads(file_content)
+
+        table = dynamodb.Table(TABLE_NAME)
 
         # Insert data into DynamoDB
         table.put_item(Item=data)
