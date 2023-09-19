@@ -5,9 +5,20 @@ import boto3
 s3_client = boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
 table_name = os.environ['DynamoDBTable']
+api_key = os.environ['API_KEY'] 
 
 def lambda_handler(event, context):
     try:
+        # Check for the presence of the API Key in the request headers
+        api_key = event['headers']['x-api-key']
+
+        # Your API Key validation logic goes here
+        if api_key != api_key:
+            return {
+                'statusCode': 403,
+                'body': json.dumps('Access denied: Invalid API Key')
+            }
+        
         # Extract information from the S3 event
         bucket = event['Records'][0]['s3']['bucket']['name']
         object_key = event['Records'][0]['s3']['object']['key']
