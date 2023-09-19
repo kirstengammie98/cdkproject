@@ -2,12 +2,13 @@ import os
 import json
 import boto3
 
-TABLE_NAME = os.environ['DynamoDBTable']
+TABLE_NAME = os.environ['DYNAMODB_TABLE']
 API_KEY = os.environ['API_KEY'] 
 
 s3_client = boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table(TABLE_NAME)
+
 
 def lambda_handler(event, context):
     try:
