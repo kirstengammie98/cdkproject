@@ -1,8 +1,11 @@
 import os
 import json
 import boto3
+import uuid
+from botocore.exceptions import ClientError
 
-TABLE_NAME = os.environ['DYNAMODB_TABLE']
+s3_bucket_name = os.environ['S3_BUCKET_NAME']
+table_name = os.environ['DYNAMODB_TABLE_NAME']
 
 s3_client = boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
@@ -21,7 +24,7 @@ def lambda_handler(event, context):
         # Parse the file content (assuming it's JSON) and insert it into DynamoDB
         data = json.loads(file_content)
 
-        table = dynamodb.Table(TABLE_NAME)
+        table = dynamodb.Table(table_name)
 
         # Insert data into DynamoDB
         table.put_item(Item=data)
