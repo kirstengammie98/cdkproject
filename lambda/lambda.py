@@ -1,8 +1,6 @@
 import os
 import json
 import boto3
-import uuid
-from botocore.exceptions import ClientError
 
 s3_bucket_name = os.environ['S3_BUCKET_NAME']
 table_name = os.environ['DYNAMODB_TABLE_NAME']
