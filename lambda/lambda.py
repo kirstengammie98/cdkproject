@@ -8,11 +8,7 @@ dynamodb = boto3.resource('dynamodb')
 
 def lambda_handler(event, context):
     try:
-        print(json.dumps(event, indent=2))
         # Extract information from the S3 event
-        # bucket_name = os.environ['BUCKET_NAME']
-        # file_key = event['fileKey']
-
         bucket = event['Records'][0]['s3']['bucket']['name']
         object_key = event['Records'][0]['s3']['object']['key']
         
