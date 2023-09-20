@@ -2,12 +2,11 @@ import os
 import json
 import boto3
 
-TABLE_NAME = os.environ['DynamoDBTable']
-API_KEY = os.environ['API_KEY'] 
+s3_bucket_name = os.environ['S3_BUCKET_NAME']
+table_name = os.environ['DYNAMODB_TABLE_NAME']
 
 s3_client = boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table(TABLE_NAME)
 
 def lambda_handler(event, context):
     try:
@@ -21,17 +20,9 @@ def lambda_handler(event, context):
         
         # Parse the file content (assuming it's JSON) and insert it into DynamoDB
         data = json.loads(file_content)
-
-        # Check for the presence of the API Key in the request headers
-        key = event['headers']['x-api-key']
-
-        # Your API Key validation logic goes here
-        if key != API_KEY:
-            return {
-                'statusCode': 403,
-                'body': json.dumps('Access denied: Invalid API Key')
-            }
         
+        table = dynamodb.Table(table_name)
+
         # Insert data into DynamoDB
         table.put_item(Item=data)
 
